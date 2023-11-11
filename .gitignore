@@ -37,3 +37,4 @@ next-env.d.ts
 # arweave
 wallet.json
 contracts-dist
+.env

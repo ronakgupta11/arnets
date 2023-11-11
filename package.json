@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy-contracts": "node ./scripts/deploy.mjs"
+    "deploy-contracts": "node ./scripts/deploy.mjs",
+    "deploy": "next build && node ./scripts/deploy.mjs",
+    "deploy-ar": "next build && arweave deploy-dir .next --key-file wallet.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -21,7 +23,8 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "arweave": "^1.14.4",
+    "arweave-account": "^1.4.3",
+    "arweave-deploy": "^1.9.1",
     "arweave-wallet-kit": "^1.0.3",
     "arweavekit": "^1.5.1",
     "class-variance-authority": "^0.7.0",
@@ -41,6 +44,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@irys/sdk": "^0.0.4",
+    "arweave": "^1.14.4",
     "autoprefixer": "^9.0.0",
     "esbuild": "^0.19.5",
     "eslint": "^8",

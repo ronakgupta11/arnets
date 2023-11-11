@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "StarterKit",
-  description: "Create a full-stack, typesafe Arweave app.",
+  name: "ArNet",
+  description: "Explore Arweave Atomic Assets in one Place",
   mainNav: [
     {
       title: "Home",
@@ -12,8 +12,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "",
+    github: "",
+    docs: "",
   },
 };

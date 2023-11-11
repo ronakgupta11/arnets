@@ -1,10 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Stamp } from "@/components/stamp-like";
-import { CommentDialog } from "@/components/comment";
 import { Separator } from "@/components/ui/separator";
 
 const imageLoader = ({ src, width, quality }) => {
@@ -14,48 +10,27 @@ const imageLoader = ({ src, width, quality }) => {
 
 const videoUrl = (src)=> `https://ar-io.dev/${src}`
 export function AssetCard(props) {
+  console.log(props.type)
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle className={cn("text-md font-bold")}>{props.title}</CardTitle>
-        <CardDescription>{props.creatorName}</CardDescription>
-      </CardHeader>
       <CardContent>
-        <Image
+       {props.type === "image"  &&<Image
           src={props.id}
           alt={props.title}
           loader={imageLoader}
           className="aspect-[1/1] h-fit w-fit object-contain mx-auto"
           width={200}
           height={200}
-        />
-        <video src={videoUrl(props.id)}/>
+        />}
+        {props.type === "video" && <video >
+          <source
+           src={videoUrl(props.id)}/>
+          </video>}
+          <p className="text-sm font-semibold max-w-full">Transaction id:</p>
+        <Separator/>
+          <p className="text-sm max-w-full">{`${props.id.slice(0,8)}....${props.id.slice(-8)}`}</p>
       </CardContent>
-      <CardFooter>
-        <div className="flex flex-col gap-2 max-w-full">
-          <div className="flex gap-4 max-w-full">
-            <Stamp txId={props.id} />
-            <CommentDialog txId={props.id} />
-          </div>
-          <p className="text-xs max-w-full">{props.description}</p>
-          <div className="grid grid-cols-3 gap-2 max-w-full">
-            {props.topics.map((topic, index) => (
-              <Badge variant="outline" key={index} className="w-fit h-fit">
-                {topic}
-              </Badge>
-            ))}
-          </div>
-          <Separator className="my-2" />
-          <div className="grid gap-2 max-w-full">
-            <Badge variant="outline" className="w-fit h-fit">
-              License: {props.license[0]}
-            </Badge>
-            <Badge variant="outline" className="w-fit h-fit">
-              Fee: {props.license[1]}
-            </Badge>
-          </div>
-        </div>
-      </CardFooter>
+
     </Card>
   );
 }

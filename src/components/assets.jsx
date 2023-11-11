@@ -23,6 +23,10 @@ edges {
       name
       value
     }
+    data {
+      size
+      type
+  }
     block {
       timestamp
     }
@@ -33,7 +37,7 @@ edges {
 
 `;
 
-console.log(query)
+// console.log(query)
 
   React.useEffect(() => {
     async function fetchData() {
@@ -47,8 +51,8 @@ console.log(query)
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-6">
       {assets.map((asset) => (
-        <Link href={`/view/${asset.id}`}>
-        <AssetCard {...asset} key={asset.id} type={query_id}  />
+        <Link key={asset.id} href={`/view/${asset.id}`}>
+        <AssetCard {...asset}  type={query_id.slice(2,7)}  />
         </Link>
       ))}
     </div>

@@ -1,6 +1,6 @@
 
 import { queryAllTransactionsGQL } from "arweavekit/graphql";
-
+import { account } from "./query-asset";
 // function to fetch posts create from defined contract source
 export async function getAssetData(query) {
   const response = await queryAllTransactionsGQL(query, {
@@ -8,6 +8,7 @@ export async function getAssetData(query) {
     filters: {},
   });
 
+  console.log(response)
   const findTagValue = (tagName, tags) => {
     return tags.find((tag) => tag.name === tagName)?.value;
   };
@@ -38,8 +39,10 @@ export async function getAssetData(query) {
 
   return response.map((edges) => {
     const tags = edges.node.tags;
-
+    const height = edges.node.block ? edges.node.block.height : -1;
+  const timestamp = edges.node?.block?.timestamp ? parseInt(edges.node.block.timestamp, 10) * 1000 : -1;
     return {
+      node:edges.node,
       id: edges.node.id,
       title: findTagValue("Title", tags) || "",
       description: findTagValue("Description", tags) || "",
@@ -47,8 +50,20 @@ export async function getAssetData(query) {
       topics: findTopicValues(tags),
       creatorId: findTagValue("Creator", tags) || edges.node.owner.address,
       creatorName: findTagValue("Creator-Name", tags) || "",
+      account: account.get(edges.node.owner.address),
+      timestamp:timestamp,
+      height:height,
+      tags:tags,
+      data:edges.node.data
+
     };
   });
 }
 
-
+export const getSingleAsset = async(query)=>{
+  const response = await queryAllTransactionsGQL(query, {
+    gateway: "arweave.net",
+    filters: {},
+  });
+return response
+}
