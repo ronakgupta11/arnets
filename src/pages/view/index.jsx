@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 
 export default function ViewPage() {
-  const [selectedOption, setSelectedOption] = useState(["image/png","image/jpeg"]);
+  const [selectedOption, setSelectedOption] = useState(`["image/png","image/jpeg"]`);
 
   const handleOptionChange = (event) => {
   setSelectedOption(event.target.value);
@@ -24,15 +24,15 @@ export default function ViewPage() {
             <p className="max-w-[700px] text-lg text-muted-foreground">Filter</p>
             <div>
       {/* <h2>Selected Option: {selectedOption}</h2> */}
-      {/* <select value={selectedOption} onChange={handleOptionChange}>
+      <select value={selectedOption} onChange={handleOptionChange}>
         <option value="">Select an option</option>
-        <option value={`["image/png","image/jpeg"]`}>image</option>
-        <option value={`["video/mp4"]`}>video</option>
-        <option value={`["video/mp4"]`}>sudio</option>
-      </select> */}
+        <option value={`["image/png","image/jpeg","image/avif","image/gif","image/svg+xml"]`}>image</option>
+        <option value={`["video/mp4","video/x-msvideo","video/3gpp","video/webm","video/ogg","video/mpeg"]`}>video</option>
+        {/* <option value={`["video/mp4"]`}>sudio</option> */}
+      </select>
     </div>
           </div>
-          <Assets query ={selectedOption} />
+          <Assets query_id ={selectedOption} />
         </section>
       </div>
     </>

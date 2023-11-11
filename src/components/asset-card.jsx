@@ -12,6 +12,7 @@ const imageLoader = ({ src, width, quality }) => {
   return `https://ar-io.dev/${src}?w=${width}&q=${quality || 75}`;
 };
 
+const videoUrl = (src)=> `https://ar-io.dev/${src}`
 export function AssetCard(props) {
   return (
     <Card className="w-full">
@@ -28,6 +29,7 @@ export function AssetCard(props) {
           width={200}
           height={200}
         />
+        <video src={videoUrl(props.id)}/>
       </CardContent>
       <CardFooter>
         <div className="flex flex-col gap-2 max-w-full">

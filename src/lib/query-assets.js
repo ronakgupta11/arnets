@@ -1,9 +1,8 @@
-import contractData from "@/contracts/contractData.json";
-// imports
+
 import { queryAllTransactionsGQL } from "arweavekit/graphql";
 
 // function to fetch posts create from defined contract source
-export async function getAssetData() {
+export async function getAssetData(query) {
   const response = await queryAllTransactionsGQL(query, {
     gateway: "arweave.net",
     filters: {},
@@ -51,29 +50,5 @@ export async function getAssetData() {
     };
   });
 }
-// query requesting posts referencing the defined contract source
-const queryId = contractData.contractId;
-const query = `
-query{
-  transactions(tags: [
-  { name: "Content-type", values: ["image/png","image/jpeg"] }
-  ] first: 100) {
-edges {
-  node {
-    id
-    owner {
-      address
-    }
-    tags {
-      name
-      value
-    }
-    block {
-      timestamp
-    }
-  }
-}
-}
-}
 
-`;
+
